@@ -1,4 +1,4 @@
 wetlab
 ======
 
-Smart Wet Lab
+Readme for smart wet lab repo.  
