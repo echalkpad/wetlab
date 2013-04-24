@@ -17,10 +17,12 @@ url = require('url');
 var startTime = new Date().getTime();
 
 var currentState = 'Idle';
-
-var couchdb = require('../../node-couchdb/lib/couchdb'),
-    client = couchdb.createClient(5984, 'localhost'),
-    db = client.db('bioturk');
+var cradle = require('cradle');
+  var connection = new(cradle.Connection)('http://localhost', 5984);
+  //, {
+  //    auth: { username: 'username', password: 'password' }
+  //});
+var db = connection.database('bioturk');
  
 
 http.createServer(function (req, res) {
@@ -59,8 +61,8 @@ http.createServer(function (req, res) {
         var query = url_parts.query;
         var delta = Math.round((now - startTime)/1000);
         // pull out known sensors
-        db.getDoc("sensors", function(error, doc) {
-            if(error) {
+        db.get('sensors', function (err, doc) {
+            if(err) {
                 res.end("Badness, i don't know where the sensor document is...");
             }
             else {
@@ -142,10 +144,30 @@ http.createServer(function (req, res) {
     /**
      * Display the 404 page for content that can't be found
      **/
-    function display_404(url, req, res) {
+    
+function display_404(url, req, res) {
 	res.writeHead(404, {'Content-Type': 'text/html'});
+	var response = '';
+  db.save('document_key', {
+      name: 'A Funny Name'
+  }, function (err, resx) {
+      if (err) {
+          // Handle error
+          response += ' SAVE ERROR: Could not save record!!\n';
+      } else {
+          // Handle success
+          response += ' SUCESSFUL SAVE\n';
+      }
+      db.get('document_key', function (err, doc) {
+          response += ' DOCUMENT: ' + doc + '\n';
+          res.write(response);
 	res.write("<h1>404 Not Found</h1>");
-	res.end("The page you were looking for: "+url+" can not be found");
+	res.end("The page you were looking for: "+url+" can not be found Cool dude.");
+      });
+      });
     }
 }).listen(8888);
+
+
+
 sys.puts('Server running at http://127.0.0.1:8888/');
