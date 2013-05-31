@@ -1,0 +1,123 @@
+
+<% include pre %>  
+
+<!--### Navigation Bar -->
+<div class="navbar" navbar-fixed-top="">
+<div class="navbar__inner"><a class="navbar__brand" href="http://istc-pc.washington.edu/concepts/smart-wet-lab/" target="_">The Bioturk Sensing System:</a>
+<ul class="nav">
+<li><a href="/status">Status</a></li>
+<li><a href="/history">History</a></li>
+<!-- <li class="divider-vertical"></li> -->
+<li class="active"><a href="/testing">Testing</a></li>
+</ul>
+</div>
+</div>
+<!--### Navigation Bar -->
+<br>
+
+
+<table width=100%><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>
+<h1><%= title %></h1>
+(State: <%= state %>)
+<p>
+<p>
+
+<% if((Object.keys(keyedResults).length>0) || (textResults.length>0)) { %>
+	
+	  <div class="hero-unit">
+		<% if(Object.keys(keyedResults).length>0) { %>
+	  	<h3>Output:</h3>
+
+	  	<div style="margin-left: 1em;">
+	    <% for (var key in keyedResults) { %>
+			<b><%= key %></b> : <%= keyedResults[key] %><br>
+	    <% } %>
+	    </div>
+	    <% } %>
+
+	<% if(textResults.length>0) { %>
+		<p>
+	  	<h3>Output from the sensors:</h3>
+
+	  	<div style="margin-left: 1em;">
+	    <% for(var i=0; i<textResults.length; i++) { %>
+			<%= textResults[i] %><br>
+	    <% } %>
+	    </div>
+	    <% } %>
+  </div>
+  <p>
+
+<% } %>
+
+
+
+<% if(state == 'Recording') { %>
+	<div class="hero-unit">
+	<div class="l-wrap">
+	<div class="l-summary">
+	<h3>Stop Recording:</h3>
+	</div><!-- l-summary -->
+	<div class="l-content">
+	<a href=/stop>Stop now</a>
+	</div>
+	</div>
+	</div>
+<% } %>
+
+<% if(state == 'Idle') { %>
+
+<div class="hero-unit">
+<div class="l-wrap">
+<div class="l-summary">
+<h3>Start Recording:</h3>
+</div><!-- l-summary -->
+
+<div class="l-content">
+
+<form action="/start" method="GET">
+
+
+<label for="text">User name</label><br>
+<input type="text" name="user_name" value="John Smith"><br>
+
+<label for="text">Protocol ID</label><br>
+<input type="text" name="protocol_id" value="Test"><br>
+
+<label for="text">Step ID</label><br>
+<input type="text" name="step_id" value="shake_dont_stir"><br>
+
+<label for="number">Record Time Limit (s)</label><br>
+<input type="number" name="time_limit" value="30"><br>
+
+<label for="text">Sensor to Record</label><br>
+	  	<div style="margin-left: 1em;">
+		<ul>
+	    <% for(var i=0; i<sensorNames.length; i++) { %>
+			<li><i><label class="checkbox"><input type="checkbox" checked="true" name="sensors" value="<%= sensorNames[i] %>"><%= sensorNames[i] %></label></i></li>
+	    <% } %>
+		</ul>
+	    </div>
+
+
+<label for="text">Step Description</label><br>
+<input type="text" name="step_desc" value="Blank"><br>
+
+<br><input type="submit" value="Start Recording"><br>
+</form>
+</div>
+</div>
+</div>
+<% } %>
+
+
+<div class="hero-unit">
+
+	<center><a href=/history>View recording History</a> --
+	<a href=/delete>Delete All Unprocessed Recordings</a>
+</center>
+</div>
+
+
+</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></table>
+<% include post %>  

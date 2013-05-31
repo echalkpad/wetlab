@@ -1,0 +1,57 @@
+
+<% include pre %>  
+
+<!--### Navigation Bar -->
+<div class="navbar" navbar-fixed-top="">
+<div class="navbar__inner"><a class="navbar__brand" href="http://istc-pc.washington.edu/concepts/smart-wet-lab/" target="_">The Bioturk Sensing System:</a>
+<ul class="nav">
+<li><a href="/status">Status</a></li>
+<li class="active"><a href="/history">History</a></li>
+<!-- <li class="divider-vertical"></li> -->
+<li><a href="/testing">Testing</a></li>
+</ul>
+</div>
+</div>
+<!--### Navigation Bar -->
+<br>
+
+
+<table width=100%><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>
+<h1><%= title %></h1>
+
+<div class="hero-unit">
+<h3>Raw Recordings:</h3>
+
+	<table class="table table-compact">
+		<thead>
+		<tr>
+    <% for(var i=0; i<rawfields.length; i++) { %>
+		<th><%= rawfields[i] %></th>
+    <% } %>
+    	</tr>
+		</thead>
+		<tbody>
+    <% for(var i=0; i<rawrecs.length; i++) { %>
+        <tr>
+    <% for(var j=0; j<rawfields.length; j++) { %>
+		<td><%= rawrecs[i][rawfields[j]] %></td>
+    <% } %>
+       </tr>
+    <% } %>
+	
+	</tbody>
+
+	</table>
+</div>
+
+<div class="hero-unit">
+<h3>Processed Recordings:</h3>
+<p>
+(To be implemented)
+</div>
+
+
+
+
+</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></table>
+<% include post %>  

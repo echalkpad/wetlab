@@ -31,6 +31,18 @@ it should show something nice
 6. Add the cradle package for node to access couchdb
 > sudo npm install cradle -g
 
+7. Add the ssh package to allow connections to the machines driving the sensors
+> sudo npm install ssh2 -g
+
+=================
+To Run the server
+=================
+
+1. Make sure the added node modules are on your path
+  - In windows: set NODE_PATH=C:\Documents and Settings\<userid>\Application Data\npm\node_modules
+     (for me: set NODE_PATH=C:\Documents and Settings\lamarca\Application Data\npm\node_modules  )
+  - In linux: 
+
 optional stuff:
 
 - Download Komodo edit. It's a nice editor for node.js

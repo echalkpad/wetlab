@@ -1,0 +1,64 @@
+
+<% include pre %>  
+
+<!--### Navigation Bar -->
+<div class="navbar" navbar-fixed-top="">
+<div class="navbar__inner"><a class="navbar__brand" href="http://istc-pc.washington.edu/concepts/smart-wet-lab/" target="_">The Bioturk Sensing System:</a>
+<ul class="nav">
+<li class="active"><a href="/status">Status</a></li>
+<li><a href="/history">History</a></li>
+<!-- <li class="divider-vertical"></li> -->
+<li><a href="/testing">Testing</a></li>
+</ul>
+</div>
+</div>
+<!--### Navigation Bar -->
+<br>
+
+
+<table width=100%><tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td>
+<h1><%= title %></h1>
+
+<div class="hero-unit">
+<h3>Server Status:</h3>
+<p>
+	<table class="table table-bordered">
+		<tr><td>Server uptime:</td><td><%= uptime %></td></tr>
+		<tr><td>Current state:</td><td><%= state %></td></tr>
+	</table>
+
+<ul>
+    <% for(var i=0; i<currentlyrecording.length; i++) { %>
+        <li>
+                <%= currentlyrecording[i].sensor %> and <%= currentlyrecording[i].val %>
+        </li>
+    <% } %>
+</ul>
+</div>
+
+
+
+<div class="hero-unit">
+<h3>Known sensors:</h3>
+
+	<table class="table table-compact">
+		<thead>
+		<tr><th scope="col">Name</th><th>Info</th></tr>
+		</thead>
+		<tbody>
+    <% for(var i=0; i<sensor.length; i++) { %>
+		<tr><td><%= sensor[i].name %></td><td><%= sensor[i].info %></td></tr>
+    <% } %>
+	
+	</tbody>
+
+	</table>
+</div>
+
+
+
+</br>
+
+
+</td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></table>
+<% include post %>  
