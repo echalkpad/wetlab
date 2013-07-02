@@ -247,7 +247,7 @@ module.exports = function Sensor() {
 	    // send a 'stop' to each of the ssh sensors
 		for (var key in this.sshDesc) {
   			if (sensorMan.sshDesc.hasOwnProperty(key)) {
-  				sensorMan.sshSensors[key].stream.write('STOP\n'); // tell the SSH sensor to stop
+  				sensorMan.sshSensors[key].stream.write('stop\n'); // tell the SSH sensor to stop
   			}
   		}
 		for (var key in this.squidDesc) {
